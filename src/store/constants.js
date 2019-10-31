@@ -1,2 +1,8 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_DATA = "LOGIN_DATA";
+
+export const ENQUEUE_SNACKBAR = 'ENQUEUE_SNACKBAR';
+export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
+export const REMOVE_SNACKBAR = 'REMOVE_SNACKBAR';
+
+export const  FETCH_CLASSES = "FETCH_CLASSES";

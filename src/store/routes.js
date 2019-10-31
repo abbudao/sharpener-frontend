@@ -1,7 +1,9 @@
-import { loginActions } from 'store/actions';
-import { authenticateUser } from 'api';
+import { loginActions, classesActions } from 'store/actions';
+import { authenticateUser, getClasses  } from 'api';
 
-const { userData, loginSuccess } = loginActions;
+const { userData, loginSuccess} = loginActions;
+const { fetchClasses } = classesActions;
+
 
 const landingThunk = (dispatch, getState) => {
   const { location, user } = getState();
@@ -22,13 +24,27 @@ const landingThunk = (dispatch, getState) => {
   }
 }
 
-const homeThunk = (dispatch, getState) => {
+const requiresAuth = (dispatch, getState) => {
   const { user } = getState();
   if(!user.isLoggedIn){
     dispatch({
       type:'LANDING'
     });
   }
+}
+
+
+const classThunk = (dispatch, getState) => {
+  requiresAuth(dispatch, getState);
+  const { user } = getState()
+  getClasses(user.token).then( resp => {
+    dispatch(fetchClasses(resp.data))
+  })
+
+}
+
+const homeThunk = (dispatch, getState) => {
+  requiresAuth(dispatch, getState);
 }
 
 const routesMap = {
@@ -39,6 +55,10 @@ const routesMap = {
   HOME: {
     path:'/home',
     thunk: homeThunk,
+  },
+  CLASSES: {
+    path:'/classes',
+    thunk: classThunk,
   },
 }
 

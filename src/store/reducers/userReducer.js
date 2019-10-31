@@ -1,6 +1,8 @@
 import { LOGIN_SUCCESS, LOGIN_DATA } from 'store/constants';
 
-const loginReducer = (state = false, action) => {
+const loginReducer = (state = {
+  isLoggedIn: true,
+}, action) => {
   const { payload, type } = action;
   switch (type) {
     case LOGIN_DATA:

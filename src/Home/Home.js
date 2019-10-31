@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Home = ({ token, loading }) =>(
-  loading 
-  ?(<div> Loading your user data...</div>)
-  :<div> Your CLI token is: {token}</div>
+const Home = () =>(
+  <React.Fragment>
+    </React.Fragment>
 )
 
  export default Home;
