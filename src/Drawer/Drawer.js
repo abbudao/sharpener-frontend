@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'redux-first-router-link'
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import BookIcon from '@material-ui/icons/Book';
 import ExitToApp from '@material-ui/icons/ExitToApp';
@@ -37,13 +36,9 @@ const miscDrawerSections = [
 
 const drawerSections = [
   {
-    name: 'Dashboard',
-    Icon: DashboardIcon,
-    link: "/home",
-  },
-  {
     name: 'Turmas',
-    Icon: PeopleIcon, link: "/classes",
+    Icon: PeopleIcon,
+    link: "/classes",
   },
   {
     name: 'Trilhas',
