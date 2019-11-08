@@ -1,27 +1,48 @@
 import React from 'react'
-import { connect, Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
+import Drawer from 'Drawer';
+import { Provider } from 'react-redux'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { SnackbarProvider } from 'notistack';
 
-import configureStore from './configureStore'
-import * as components from './components'
+import App from 'App';
+import Notifier from 'Notifier';
 
-// App component
-const App = ({ page }) => {
-  const Component = components[page]
-  return <Component />
-}
-const ConnectedApp = connect(({ page }) => ({ page }))(App)
+import configureStore from 'store';
+const store = configureStore()
 
-// Redux setup
-const { store, firstRoute } = configureStore()
+const mainBlue = "rgba(15, 154, 229, 1)";
+const secondaryBlue = "rgba(55, 171, 234, 1)";
 
-function render() {
-  ReactDOM.render(
-    <Provider store={store}>
-      <ConnectedApp />
-    </Provider>,
-    document.getElementById('root'),
-  )
-}
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: '#e9eaeb',
+    },
+    primary: {
+      main: mainBlue ,
+      light: secondaryBlue,
+    },
+  },
+  status: {
+    danger: 'orange',
+  },
+});
 
-store.dispatch(firstRoute()).then(() => render())
+
+ReactDOM.render(
+  <Provider store={store}>
+    <SnackbarProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <React.Fragment>
+          <Drawer/>
+          <Notifier />
+          <App />
+        </React.Fragment>
+        </ThemeProvider>
+      </SnackbarProvider>
+  </Provider>,
+  document.getElementById('root'),
+);
